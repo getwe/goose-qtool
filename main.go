@@ -50,11 +50,12 @@ func work(ip,port,cmd string) {
     }
 
     reqbuf := bytes.NewBufferString(cmd)
-    _,err = conn.Write(reqbuf.Bytes())
+    writeLen,err := conn.Write(reqbuf.Bytes())
     if err != nil {
         fmt.Println(err)
         os.Exit(1)
     }
+    fmt.Printf("write data len[%d]\n",writeLen)
 
     resbytes,err := ioutil.ReadAll(conn)
     if err != nil {
